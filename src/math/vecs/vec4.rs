@@ -1,6 +1,6 @@
 use crate::math::vecs::VecOperations;
-use std::ops::{Add, Sub, Mul, Div, Neg, AddAssign, SubAssign, MulAssign, DivAssign};
 use std::fmt;
+use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign};
 
 /// A four-dimensional vector. Useful for homogeneous coordinates and 4D math.
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
@@ -31,10 +31,22 @@ impl Vec4 {
 
 impl fmt::Display for Vec4 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let x = format!("{:.10}", self.x).trim_end_matches('0').trim_end_matches('.').to_string();
-        let y = format!("{:.10}", self.y).trim_end_matches('0').trim_end_matches('.').to_string();
-        let z = format!("{:.10}", self.z).trim_end_matches('0').trim_end_matches('.').to_string();
-        let w = format!("{:.10}", self.w).trim_end_matches('0').trim_end_matches('.').to_string();
+        let x = format!("{:.10}", self.x)
+            .trim_end_matches('0')
+            .trim_end_matches('.')
+            .to_string();
+        let y = format!("{:.10}", self.y)
+            .trim_end_matches('0')
+            .trim_end_matches('.')
+            .to_string();
+        let z = format!("{:.10}", self.z)
+            .trim_end_matches('0')
+            .trim_end_matches('.')
+            .to_string();
+        let w = format!("{:.10}", self.w)
+            .trim_end_matches('0')
+            .trim_end_matches('.')
+            .to_string();
         write!(f, "Vec4 ({}, {}, {}, {})", x, y, z, w)
     }
 }
@@ -45,7 +57,12 @@ impl Add for Vec4 {
     type Output = Self;
     #[inline]
     fn add(self, rhs: Self) -> Self::Output {
-        Self { x: self.x + rhs.x, y: self.y + rhs.y, z: self.z + rhs.z, w: self.w + rhs.w }
+        Self {
+            x: self.x + rhs.x,
+            y: self.y + rhs.y,
+            z: self.z + rhs.z,
+            w: self.w + rhs.w,
+        }
     }
 }
 
@@ -53,7 +70,12 @@ impl Sub for Vec4 {
     type Output = Self;
     #[inline]
     fn sub(self, rhs: Self) -> Self::Output {
-        Self { x: self.x - rhs.x, y: self.y - rhs.y, z: self.z - rhs.z, w: self.w - rhs.w }
+        Self {
+            x: self.x - rhs.x,
+            y: self.y - rhs.y,
+            z: self.z - rhs.z,
+            w: self.w - rhs.w,
+        }
     }
 }
 
@@ -61,7 +83,12 @@ impl Mul for Vec4 {
     type Output = Self;
     #[inline]
     fn mul(self, rhs: Self) -> Self::Output {
-        Self { x: self.x * rhs.x, y: self.y * rhs.y, z: self.z * rhs.z, w: self.w * rhs.w }
+        Self {
+            x: self.x * rhs.x,
+            y: self.y * rhs.y,
+            z: self.z * rhs.z,
+            w: self.w * rhs.w,
+        }
     }
 }
 
@@ -69,7 +96,12 @@ impl Mul<f64> for Vec4 {
     type Output = Self;
     #[inline]
     fn mul(self, rhs: f64) -> Self::Output {
-        Self { x: self.x * rhs, y: self.y * rhs, z: self.z * rhs, w: self.w * rhs }
+        Self {
+            x: self.x * rhs,
+            y: self.y * rhs,
+            z: self.z * rhs,
+            w: self.w * rhs,
+        }
     }
 }
 
@@ -77,7 +109,12 @@ impl Div for Vec4 {
     type Output = Self;
     #[inline]
     fn div(self, rhs: Self) -> Self::Output {
-        Self { x: self.x / rhs.x, y: self.y / rhs.y, z: self.z / rhs.z, w: self.w / rhs.w }
+        Self {
+            x: self.x / rhs.x,
+            y: self.y / rhs.y,
+            z: self.z / rhs.z,
+            w: self.w / rhs.w,
+        }
     }
 }
 
@@ -85,7 +122,12 @@ impl Div<f64> for Vec4 {
     type Output = Self;
     #[inline]
     fn div(self, rhs: f64) -> Self::Output {
-        Self { x: self.x / rhs, y: self.y / rhs, z: self.z / rhs, w: self.w / rhs }
+        Self {
+            x: self.x / rhs,
+            y: self.y / rhs,
+            z: self.z / rhs,
+            w: self.w / rhs,
+        }
     }
 }
 
@@ -93,11 +135,17 @@ impl Neg for Vec4 {
     type Output = Self;
     #[inline]
     fn neg(self) -> Self::Output {
-        Self { x: -self.x, y: -self.y, z: -self.z, w: -self.w }
+        Self {
+            x: -self.x,
+            y: -self.y,
+            z: -self.z,
+            w: -self.w,
+        }
     }
 }
 
 impl AddAssign for Vec4 {
+    #[inline]
     fn add_assign(&mut self, rhs: Self) {
         self.x += rhs.x;
         self.y += rhs.y;
@@ -107,6 +155,7 @@ impl AddAssign for Vec4 {
 }
 
 impl SubAssign for Vec4 {
+    #[inline]
     fn sub_assign(&mut self, rhs: Self) {
         self.x -= rhs.x;
         self.y -= rhs.y;
@@ -116,6 +165,7 @@ impl SubAssign for Vec4 {
 }
 
 impl MulAssign for Vec4 {
+    #[inline]
     fn mul_assign(&mut self, rhs: Self) {
         self.x *= rhs.x;
         self.y *= rhs.y;
@@ -135,6 +185,7 @@ impl MulAssign<f64> for Vec4 {
 }
 
 impl DivAssign for Vec4 {
+    #[inline]
     fn div_assign(&mut self, rhs: Self) {
         self.x /= rhs.x;
         self.y /= rhs.y;
@@ -225,7 +276,11 @@ impl VecOperations for Vec4 {
     /// ```
     #[inline]
     fn distance(self, other: Self) -> f64 {
-        ((self.x - other.x).powi(2) + (self.y - other.y).powi(2) + (self.z - other.z).powi(2) + (self.w - other.w).powi(2)).sqrt()
+        ((self.x - other.x).powi(2)
+            + (self.y - other.y).powi(2)
+            + (self.z - other.z).powi(2)
+            + (self.w - other.w).powi(2))
+        .sqrt()
     }
 
     /// Linear interpolation between two [Vec4] by a factor `t`.
@@ -255,7 +310,12 @@ impl VecOperations for Vec4 {
     /// ```
     #[inline]
     fn min(self, other: Self) -> Self {
-        Self { x: self.x.min(other.x), y: self.y.min(other.y), z: self.z.min(other.z), w: self.w.min(other.w) }
+        Self {
+            x: self.x.min(other.x),
+            y: self.y.min(other.y),
+            z: self.z.min(other.z),
+            w: self.w.min(other.w),
+        }
     }
 
     /// Returns a [Vec4] containing the maximum components of two vectors.
@@ -270,7 +330,12 @@ impl VecOperations for Vec4 {
     /// ```
     #[inline]
     fn max(self, other: Self) -> Self {
-        Self { x: self.x.max(other.x), y: self.y.max(other.y), z: self.z.max(other.z), w: self.w.max(other.w) }
+        Self {
+            x: self.x.max(other.x),
+            y: self.y.max(other.y),
+            z: self.z.max(other.z),
+            w: self.w.max(other.w),
+        }
     }
 
     /// Clamps the [Vec4] components between `min` and `max` vectors.
@@ -286,10 +351,14 @@ impl VecOperations for Vec4 {
     /// ```
     #[inline]
     fn clamp(self, min: Self, max: Self) -> Self {
-        Self { x: self.x.clamp(min.x, max.x), y: self.y.clamp(min.y, max.y), z: self.z.clamp(min.z, max.z), w: self.w.clamp(min.w, max.w) }
+        Self {
+            x: self.x.clamp(min.x, max.x),
+            y: self.y.clamp(min.y, max.y),
+            z: self.z.clamp(min.z, max.z),
+            w: self.w.clamp(min.w, max.w),
+        }
     }
 }
-
 
 #[cfg(test)]
 mod test {
@@ -297,177 +366,574 @@ mod test {
 
     #[test]
     fn test_vec4_display() {
-        let a = Vec4 { x: 2.0, y: 3.0, z: 4.0, w: 5.0 };
+        let a = Vec4 {
+            x: 2.0,
+            y: 3.0,
+            z: 4.0,
+            w: 5.0,
+        };
         assert_eq!(format!("{}", a), "Vec4 (2, 3, 4, 5)");
 
-        let b = Vec4 { x: 1.5, y: 0.25, z: 0.125, w: 0.0625 };
+        let b = Vec4 {
+            x: 1.5,
+            y: 0.25,
+            z: 0.125,
+            w: 0.0625,
+        };
         assert_eq!(format!("{}", b), "Vec4 (1.5, 0.25, 0.125, 0.0625)");
 
-        let c = Vec4 { x: 1.1234567890123, y: 0.0000000001, z: 3.141592653589, w: 2.718281828459 }; 
-        assert_eq!(format!("{}", c), "Vec4 (1.123456789, 0.0000000001, 3.1415926536, 2.7182818285)");
+        let c = Vec4 {
+            x: 1.1234567890123,
+            y: 0.0000000001,
+            z: 3.141592653589,
+            w: 2.718281828459,
+        };
+        assert_eq!(
+            format!("{}", c),
+            "Vec4 (1.123456789, 0.0000000001, 3.1415926536, 2.7182818285)"
+        );
 
-        let d = Vec4 { x: 0.0, y: 0.0, z: 0.0, w: 0.0 };
+        let d = Vec4 {
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+            w: 0.0,
+        };
         assert_eq!(format!("{}", d), "Vec4 (0, 0, 0, 0)");
     }
 
     #[test]
     fn test_vec4_add() {
-        let a = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
-        let b = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
-        assert_eq!(a + b, Vec4 { x: 4.0, y: 4.0, z: 4.0, w: 4.0 })
+        let a = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
+        let b = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
+        assert_eq!(
+            a + b,
+            Vec4 {
+                x: 4.0,
+                y: 4.0,
+                z: 4.0,
+                w: 4.0
+            }
+        )
     }
 
     #[test]
     fn test_vec4_sub() {
-        let a = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
-        let b = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
-        assert_eq!(a - b, Vec4 { x: 0.0, y: 0.0, z: 0.0, w: 0.0 })
+        let a = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
+        let b = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
+        assert_eq!(
+            a - b,
+            Vec4 {
+                x: 0.0,
+                y: 0.0,
+                z: 0.0,
+                w: 0.0
+            }
+        )
     }
 
     #[test]
     fn test_vec4_mul() {
-        let a = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
-        let b = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
-        assert_eq!(a * b, Vec4 { x: 4.0, y: 4.0, z: 4.0, w: 4.0 })
+        let a = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
+        let b = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
+        assert_eq!(
+            a * b,
+            Vec4 {
+                x: 4.0,
+                y: 4.0,
+                z: 4.0,
+                w: 4.0
+            }
+        )
     }
 
     #[test]
     fn test_vec4_mulscalar() {
-        let a = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
-        assert_eq!(a * 2.0, Vec4 { x: 4.0, y: 4.0, z: 4.0, w: 4.0 })
+        let a = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
+        assert_eq!(
+            a * 2.0,
+            Vec4 {
+                x: 4.0,
+                y: 4.0,
+                z: 4.0,
+                w: 4.0
+            }
+        )
     }
 
     #[test]
     fn test_vec4_div() {
-        let a = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
-        let b = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
-        assert_eq!(a / b, Vec4 { x: 1.0, y: 1.0, z: 1.0, w: 1.0 })
+        let a = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
+        let b = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
+        assert_eq!(
+            a / b,
+            Vec4 {
+                x: 1.0,
+                y: 1.0,
+                z: 1.0,
+                w: 1.0
+            }
+        )
     }
 
     #[test]
     fn test_vec4_divscalar() {
-        let a = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
-        assert_eq!(a / 2.0, Vec4 { x: 1.0, y: 1.0, z: 1.0, w: 1.0 })
+        let a = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
+        assert_eq!(
+            a / 2.0,
+            Vec4 {
+                x: 1.0,
+                y: 1.0,
+                z: 1.0,
+                w: 1.0
+            }
+        )
     }
 
     #[test]
     fn test_vec4_neg() {
-        let a = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
-        assert_eq!(-a, Vec4 { x: -2.0, y: -2.0, z: -2.0, w: -2.0 })
+        let a = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
+        assert_eq!(
+            -a,
+            Vec4 {
+                x: -2.0,
+                y: -2.0,
+                z: -2.0,
+                w: -2.0
+            }
+        )
     }
 
     #[test]
     fn test_vec4_addassign() {
-        let mut a = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
-        a += Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
-        assert_eq!(a, Vec4 { x: 4.0, y: 4.0, z: 4.0, w: 4.0 })
+        let mut a = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
+        a += Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
+        assert_eq!(
+            a,
+            Vec4 {
+                x: 4.0,
+                y: 4.0,
+                z: 4.0,
+                w: 4.0
+            }
+        )
     }
 
     #[test]
     fn test_vec4_subassign() {
-        let mut a = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
-        a -= Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
-        assert_eq!(a, Vec4 { x: 0.0, y: 0.0, z: 0.0, w: 0.0 })
+        let mut a = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
+        a -= Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
+        assert_eq!(
+            a,
+            Vec4 {
+                x: 0.0,
+                y: 0.0,
+                z: 0.0,
+                w: 0.0
+            }
+        )
     }
 
     #[test]
     fn test_vec4_mulassign() {
-        let mut a = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
-        a *= Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
-        assert_eq!(a, Vec4 { x: 4.0, y: 4.0, z: 4.0, w: 4.0 })
+        let mut a = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
+        a *= Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
+        assert_eq!(
+            a,
+            Vec4 {
+                x: 4.0,
+                y: 4.0,
+                z: 4.0,
+                w: 4.0
+            }
+        )
     }
 
     #[test]
     fn test_vec4_mulassign_scalar() {
-        let mut a = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
+        let mut a = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
         a *= 2.0;
-        assert_eq!(a, Vec4 { x: 4.0, y: 4.0, z: 4.0, w: 4.0 })
+        assert_eq!(
+            a,
+            Vec4 {
+                x: 4.0,
+                y: 4.0,
+                z: 4.0,
+                w: 4.0
+            }
+        )
     }
 
     #[test]
     fn test_vec4_divassign() {
-        let mut a = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
-        a /= Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
-        assert_eq!(a, Vec4 { x: 1.0, y: 1.0, z: 1.0, w: 1.0 })
+        let mut a = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
+        a /= Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
+        assert_eq!(
+            a,
+            Vec4 {
+                x: 1.0,
+                y: 1.0,
+                z: 1.0,
+                w: 1.0
+            }
+        )
     }
 
     #[test]
     fn test_vec4_divassign_scalar() {
-        let mut a = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
+        let mut a = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
         a /= 2.0;
-        assert_eq!(a, Vec4 { x: 1.0, y: 1.0, z: 1.0, w: 1.0 })
+        assert_eq!(
+            a,
+            Vec4 {
+                x: 1.0,
+                y: 1.0,
+                z: 1.0,
+                w: 1.0
+            }
+        )
     }
 
     #[test]
     fn test_vec4_dot() {
-        let a = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
-        let b = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
+        let a = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
+        let b = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
         assert_eq!(a.dot(b), 16.0)
     }
 
     #[test]
     fn test_vec4_length2() {
-        let a = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
+        let a = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
         assert_eq!(a.length2(), 16.0)
     }
 
     #[test]
     fn test_vec4_length() {
-        let a = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
+        let a = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
         assert_eq!(a.length(), 16.0f64.sqrt())
     }
 
     #[test]
     fn test_vec4_norm() {
-        let a = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 }.norm();
+        let a = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        }
+        .norm();
         assert!((a.length() - 1.0).abs() < f64::EPSILON)
     }
 
     #[test]
     fn test_vec4_distance() {
-        let a = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
-        let b = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
+        let a = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
+        let b = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
         assert_eq!(a.distance(b), 0.0)
     }
 
     #[test]
     fn test_vec4_lerp() {
-        let a = Vec4 { x: 0.0, y: 0.0, z: 0.0, w: 0.0 };
-        let b = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
-        assert_eq!(a.lerp(b, 0.5), Vec4 { x: 1.0, y: 1.0, z: 1.0, w: 1.0 })
+        let a = Vec4 {
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+            w: 0.0,
+        };
+        let b = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
+        assert_eq!(
+            a.lerp(b, 0.5),
+            Vec4 {
+                x: 1.0,
+                y: 1.0,
+                z: 1.0,
+                w: 1.0
+            }
+        )
     }
 
     #[test]
     fn test_vec4_min() {
-        let a = Vec4 { x: 0.0, y: 0.0, z: 0.0, w: 0.0 };
-        let b = Vec4 { x: 1.0, y: 1.0, z: 1.0, w: 1.0 };
-        assert_eq!(a.min(b), Vec4 { x: 0.0, y: 0.0, z: 0.0, w: 0.0 })
+        let a = Vec4 {
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+            w: 0.0,
+        };
+        let b = Vec4 {
+            x: 1.0,
+            y: 1.0,
+            z: 1.0,
+            w: 1.0,
+        };
+        assert_eq!(
+            a.min(b),
+            Vec4 {
+                x: 0.0,
+                y: 0.0,
+                z: 0.0,
+                w: 0.0
+            }
+        )
     }
 
     #[test]
     fn test_vec4_max() {
-        let a = Vec4 { x: 0.0, y: 0.0, z: 0.0, w: 0.0 };
-        let b = Vec4 { x: 1.0, y: 1.0, z: 1.0, w: 1.0 };
-        assert_eq!(a.max(b), Vec4 { x: 1.0, y: 1.0, z: 1.0, w: 1.0 })
+        let a = Vec4 {
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+            w: 0.0,
+        };
+        let b = Vec4 {
+            x: 1.0,
+            y: 1.0,
+            z: 1.0,
+            w: 1.0,
+        };
+        assert_eq!(
+            a.max(b),
+            Vec4 {
+                x: 1.0,
+                y: 1.0,
+                z: 1.0,
+                w: 1.0
+            }
+        )
     }
 
     #[test]
     fn test_vec4_clamp() {
-        let max = Vec4 { x: 1.0, y: 1.0, z: 1.0, w: 1.0 };
-        let min = Vec4 { x: -1.0, y: -1.0, z: -1.0, w: -1.0 };
+        let max = Vec4 {
+            x: 1.0,
+            y: 1.0,
+            z: 1.0,
+            w: 1.0,
+        };
+        let min = Vec4 {
+            x: -1.0,
+            y: -1.0,
+            z: -1.0,
+            w: -1.0,
+        };
 
-        let out_min = Vec4 { x: -2.0, y: -2.0, z: -2.0, w: -2.0 };
-        let mid = Vec4 { x: 0.0, y: 0.0, z: 0.0, w: 0.0 };
-        let out_max = Vec4 { x: 2.0, y: 2.0, z: 2.0, w: 2.0 };
+        let out_min = Vec4 {
+            x: -2.0,
+            y: -2.0,
+            z: -2.0,
+            w: -2.0,
+        };
+        let mid = Vec4 {
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+            w: 0.0,
+        };
+        let out_max = Vec4 {
+            x: 2.0,
+            y: 2.0,
+            z: 2.0,
+            w: 2.0,
+        };
 
-        let mixed_out_min = Vec4 { x: -2.0, y: 0.0, z: 2.0, w: -0.5 };
-        let mixed_out_max = Vec4 { x: 2.0, y: 0.0, z: -2.0, w: 0.5 };
+        let mixed_out_min = Vec4 {
+            x: -2.0,
+            y: 0.0,
+            z: 2.0,
+            w: -0.5,
+        };
+        let mixed_out_max = Vec4 {
+            x: 2.0,
+            y: 0.0,
+            z: -2.0,
+            w: 0.5,
+        };
 
-        assert_eq!(out_min.clamp(min, max), Vec4 { x: -1.0, y: -1.0, z: -1.0, w: -1.0 });
-        assert_eq!(mid.clamp(min, max), Vec4 { x: 0.0, y: 0.0, z: 0.0, w: 0.0 });
-        assert_eq!(out_max.clamp(min, max), Vec4 { x: 1.0, y: 1.0, z: 1.0, w: 1.0 });
+        assert_eq!(
+            out_min.clamp(min, max),
+            Vec4 {
+                x: -1.0,
+                y: -1.0,
+                z: -1.0,
+                w: -1.0
+            }
+        );
+        assert_eq!(
+            mid.clamp(min, max),
+            Vec4 {
+                x: 0.0,
+                y: 0.0,
+                z: 0.0,
+                w: 0.0
+            }
+        );
+        assert_eq!(
+            out_max.clamp(min, max),
+            Vec4 {
+                x: 1.0,
+                y: 1.0,
+                z: 1.0,
+                w: 1.0
+            }
+        );
 
-        assert_eq!(mixed_out_min.clamp(min, max), Vec4 { x: -1.0, y: 0.0, z: 1.0, w: -0.5 });
-        assert_eq!(mixed_out_max.clamp(min, max), Vec4 { x: 1.0, y: 0.0, z: -1.0, w: 0.5 });
+        assert_eq!(
+            mixed_out_min.clamp(min, max),
+            Vec4 {
+                x: -1.0,
+                y: 0.0,
+                z: 1.0,
+                w: -0.5
+            }
+        );
+        assert_eq!(
+            mixed_out_max.clamp(min, max),
+            Vec4 {
+                x: 1.0,
+                y: 0.0,
+                z: -1.0,
+                w: 0.5
+            }
+        );
     }
 }

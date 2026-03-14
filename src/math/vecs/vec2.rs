@@ -1,6 +1,6 @@
 use crate::math::vecs::VecOperations;
-use std::ops::{Add, Sub, Mul, Div, Neg, AddAssign, SubAssign, MulAssign, DivAssign};
 use std::fmt;
+use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign};
 
 /// A two-dimensional vector. Suitable for points on a plane.
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Default)]
@@ -11,11 +11,11 @@ pub struct Vec2 {
 
 impl Vec2 {
     /// Creating new vector [Vec2].
-    /// 
+    ///
     /// # Examples
     /// ```
     /// use engine::math::vecs::vec2::Vec2;
-    /// 
+    ///
     /// let vector2 = Vec2::new(1.0, 2.0);
     /// assert_eq!(vector2.x, 1.0);
     /// assert_eq!(vector2.y, 2.0);
@@ -27,8 +27,14 @@ impl Vec2 {
 
 impl fmt::Display for Vec2 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let x = format!("{:.10}", self.x).trim_end_matches('0').trim_end_matches('.').to_string();
-        let y = format!("{:.10}", self.y).trim_end_matches('0').trim_end_matches('.').to_string();
+        let x = format!("{:.10}", self.x)
+            .trim_end_matches('0')
+            .trim_end_matches('.')
+            .to_string();
+        let y = format!("{:.10}", self.y)
+            .trim_end_matches('0')
+            .trim_end_matches('.')
+            .to_string();
         write!(f, "Vec2 ({}, {})", x, y)
     }
 }
@@ -39,7 +45,10 @@ impl Add for Vec2 {
     type Output = Self;
     #[inline]
     fn add(self, rhs: Self) -> Self::Output {
-       Self { x: self.x + rhs.x, y: self.y + rhs.y }
+        Self {
+            x: self.x + rhs.x,
+            y: self.y + rhs.y,
+        }
     }
 }
 
@@ -47,7 +56,10 @@ impl Sub for Vec2 {
     type Output = Self;
     #[inline]
     fn sub(self, rhs: Self) -> Self::Output {
-        Self { x: self.x - rhs.x, y: self.y - rhs.y }
+        Self {
+            x: self.x - rhs.x,
+            y: self.y - rhs.y,
+        }
     }
 }
 
@@ -55,7 +67,10 @@ impl Mul for Vec2 {
     type Output = Self;
     #[inline]
     fn mul(self, rhs: Self) -> Self::Output {
-        Self { x: self.x * rhs.x, y: self.y * rhs.y }
+        Self {
+            x: self.x * rhs.x,
+            y: self.y * rhs.y,
+        }
     }
 }
 
@@ -63,7 +78,10 @@ impl Mul<f64> for Vec2 {
     type Output = Self;
     #[inline]
     fn mul(self, rhs: f64) -> Self::Output {
-        Self { x: self.x * rhs, y: self.y * rhs }
+        Self {
+            x: self.x * rhs,
+            y: self.y * rhs,
+        }
     }
 }
 
@@ -71,7 +89,10 @@ impl Div for Vec2 {
     type Output = Self;
     #[inline]
     fn div(self, rhs: Self) -> Self::Output {
-        Self { x: self.x / rhs.x, y: self.y / rhs.y }
+        Self {
+            x: self.x / rhs.x,
+            y: self.y / rhs.y,
+        }
     }
 }
 
@@ -79,7 +100,10 @@ impl Div<f64> for Vec2 {
     type Output = Self;
     #[inline]
     fn div(self, rhs: f64) -> Self::Output {
-        Self { x: self.x / rhs, y: self.y / rhs }
+        Self {
+            x: self.x / rhs,
+            y: self.y / rhs,
+        }
     }
 }
 
@@ -87,11 +111,15 @@ impl Neg for Vec2 {
     type Output = Self;
     #[inline]
     fn neg(self) -> Self::Output {
-        Self { x: -self.x, y: -self.y }
+        Self {
+            x: -self.x,
+            y: -self.y,
+        }
     }
 }
 
 impl AddAssign for Vec2 {
+    #[inline]
     fn add_assign(&mut self, rhs: Self) {
         self.x += rhs.x;
         self.y += rhs.y;
@@ -99,6 +127,7 @@ impl AddAssign for Vec2 {
 }
 
 impl SubAssign for Vec2 {
+    #[inline]
     fn sub_assign(&mut self, rhs: Self) {
         self.x -= rhs.x;
         self.y -= rhs.y;
@@ -106,6 +135,7 @@ impl SubAssign for Vec2 {
 }
 
 impl MulAssign for Vec2 {
+    #[inline]
     fn mul_assign(&mut self, rhs: Self) {
         self.x *= rhs.x;
         self.y *= rhs.y;
@@ -121,6 +151,7 @@ impl MulAssign<f64> for Vec2 {
 }
 
 impl DivAssign for Vec2 {
+    #[inline]
     fn div_assign(&mut self, rhs: Self) {
         self.x /= rhs.x;
         self.y /= rhs.y;
@@ -139,7 +170,7 @@ impl DivAssign<f64> for Vec2 {
 
 impl VecOperations for Vec2 {
     /// Calculates the dot product of two [Vec2].
-    /// 
+    ///
     /// # Examples
     /// ```
     /// # use engine::math::vecs::vec2::Vec2;
@@ -154,7 +185,7 @@ impl VecOperations for Vec2 {
     }
 
     /// Calculates square length of [Vec2]. (Faster than [length])
-    /// 
+    ///
     /// # Examples
     /// ```
     /// # use engine::math::vecs::vec2::Vec2;
@@ -168,7 +199,7 @@ impl VecOperations for Vec2 {
     }
 
     /// Calculates sqrt length of [Vec2].
-    /// 
+    ///
     /// # Examples
     /// ```
     /// # use engine::math::vecs::vec2::Vec2;
@@ -182,7 +213,7 @@ impl VecOperations for Vec2 {
     }
 
     /// Normalize [Vec2]. Resulting length will be 1.0.
-    /// 
+    ///
     /// # Examples
     /// ```
     /// # use engine::math::vecs::vec2::Vec2;
@@ -196,7 +227,7 @@ impl VecOperations for Vec2 {
     }
 
     /// Calculates the Euclidean distance between two [Vec2].
-    /// 
+    ///
     /// # Examples
     /// ```
     /// # use engine::math::vecs::vec2::Vec2;
@@ -211,7 +242,7 @@ impl VecOperations for Vec2 {
     }
 
     /// Linear interpolation between two [Vec2] by a factor `t`.
-    /// 
+    ///
     /// # Examples
     /// ```
     /// # use engine::math::vecs::vec2::Vec2;
@@ -226,7 +257,7 @@ impl VecOperations for Vec2 {
     }
 
     /// Returns a [Vec2] containing the minimum components of two vectors.
-    /// 
+    ///
     /// # Examples
     /// ```
     /// # use engine::math::vecs::vec2::Vec2;
@@ -237,11 +268,14 @@ impl VecOperations for Vec2 {
     /// ```
     #[inline]
     fn min(self, other: Self) -> Self {
-        Self { x: self.x.min(other.x), y: self.y.min(other.y) }
+        Self {
+            x: self.x.min(other.x),
+            y: self.y.min(other.y),
+        }
     }
 
     /// Returns a [Vec2] containing the maximum components of two vectors.
-    /// 
+    ///
     /// # Examples
     /// ```
     /// # use engine::math::vecs::vec2::Vec2;
@@ -252,11 +286,14 @@ impl VecOperations for Vec2 {
     /// ```
     #[inline]
     fn max(self, other: Self) -> Self {
-        Self { x: self.x.max(other.x), y: self.y.max(other.y) }
+        Self {
+            x: self.x.max(other.x),
+            y: self.y.max(other.y),
+        }
     }
 
     /// Clamps the [Vec2] components between `min` and `max` vectors.
-    /// 
+    ///
     /// # Examples
     /// ```
     /// # use engine::math::vecs::vec2::Vec2;
@@ -268,10 +305,12 @@ impl VecOperations for Vec2 {
     /// ```
     #[inline]
     fn clamp(self, min: Self, max: Self) -> Self {
-        Self { x: self.x.clamp(min.x, max.x), y: self.y.clamp(min.y, max.y) }
+        Self {
+            x: self.x.clamp(min.x, max.x),
+            y: self.y.clamp(min.y, max.y),
+        }
     }
 }
-
 
 #[cfg(test)]
 mod test {
@@ -285,18 +324,21 @@ mod test {
         let b = Vec2 { x: 1.5, y: 0.25 };
         assert_eq!(format!("{}", b), "Vec2 (1.5, 0.25)");
 
-        let c = Vec2 { x: 1.1234567890123, y: 0.0000000001 };
+        let c = Vec2 {
+            x: 1.1234567890123,
+            y: 0.0000000001,
+        };
         assert_eq!(format!("{}", c), "Vec2 (1.123456789, 0.0000000001)");
 
         let d = Vec2 { x: 0.0, y: 0.0 };
         assert_eq!(format!("{}", d), "Vec2 (0, 0)");
     }
- 
+
     #[test]
     fn test_vec2_add() {
         let a = Vec2 { x: 2.0, y: 2.0 };
         let b = Vec2 { x: 2.0, y: 2.0 };
-        assert_eq!(a + b, Vec2 { x: 4.0, y: 4.0})
+        assert_eq!(a + b, Vec2 { x: 4.0, y: 4.0 })
     }
 
     #[test]
@@ -397,7 +439,7 @@ mod test {
     fn test_vec2_length() {
         let a = Vec2 { x: 2.0, y: 2.0 };
         assert_eq!(a.length(), 8.0f64.sqrt())
-    }   
+    }
 
     #[test]
     fn test_vec2_norm() {
@@ -435,17 +477,17 @@ mod test {
 
     #[test]
     fn test_vec2_clamp() {
-        let max = Vec2 { x: 1.0, y: 1.0};
+        let max = Vec2 { x: 1.0, y: 1.0 };
         let min = Vec2 { x: -1.0, y: -1.0 };
 
         let out_min = Vec2 { x: -2.0, y: -2.0 };
         let mid = Vec2 { x: 0.0, y: 0.0 };
         let out_max = Vec2 { x: 2.0, y: 2.0 };
-        
+
         let mixed_out_min = Vec2 { x: -2.0, y: 0.0 };
         let mixed_out_max = Vec2 { x: 2.0, y: 0.0 };
 
-        assert_eq!(out_min.clamp(min, max), Vec2 { x: -1.0, y: -1.0});
+        assert_eq!(out_min.clamp(min, max), Vec2 { x: -1.0, y: -1.0 });
         assert_eq!(mid.clamp(min, max), Vec2 { x: 0.0, y: 0.0 });
         assert_eq!(out_max.clamp(min, max), Vec2 { x: 1.0, y: 1.0 });
 
